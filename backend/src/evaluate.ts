@@ -1,6 +1,9 @@
 import type { Request, Response } from "express";
 import OpenAI from "openai";
 import { buildPrompt } from "./prompt";
+import "dotenv/config";
+
+const MODEL = process.env.LLM_MODEL || "nex-agi/deepseek-v3.1-nex-n1:free"
 
 const openai = new OpenAI({
   apiKey: process.env.OPENROUTER_API_KEY,
@@ -12,18 +15,12 @@ export async function evaluateIdea(req: Request, res: Response) {
   try {
     const completion = await openai.chat.completions.create(
     {
-        model: "nex-agi/deepseek-v3.1-nex-n1:free",
+        model: MODEL,
         messages: [
         { role: "system", content: "You are a helpful assistant. Respond with ONLY valid JSON. Do not use markdown. Do not add explanations." },
         { role: "user", content: buildPrompt(idea) }
         ],
         temperature: 0.3,
-    },
-    {
-        headers: {
-        "HTTP-Referer": "http://localhost:3000", // or your repo URL
-        "X-Title": "AI Innovation Screener",
-        },
     }
     );
 
