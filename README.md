@@ -42,7 +42,6 @@ Note: Keep this file private; never commit it.
 
 4. Run backend
 ```bash
-Run backend
 cd backend
 npm run dev
 ```
@@ -53,5 +52,4 @@ cd ../
 npm run dev
 ```
 
-You can access the app at http://localhost:5173 by default
-
+Once the backend and frontend are running, open your browser at the address shown in the terminal to use the web app.
